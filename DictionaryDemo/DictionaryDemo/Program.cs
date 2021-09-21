@@ -10,12 +10,15 @@ namespace DictionaryDemo
     {
         static void Main(string[] args)
         {
-            Dictionary<int, string> d = new Dictionary<int, string>();
-            d.Add(1, "Payer 5");
-            d.Add(2, "Payer 1");
-            d.Add(3, "Payer 3");
-            d.Add(4, "Payer 2");
-            d.Add(5, "Payer 4");
+            Dictionary<int, string> d = new Dictionary<int, string>() {
+                {1, "Player 5"} , {2, "Player 1"},{3, "Player 3"},{4, "Player 2"},{5, "Player 4"}
+            };
+
+            //d.Add(1, "Player 5");
+            //d.Add(2, "Player 1");
+            //d.Add(3, "Player 3");
+            //d.Add(4, "Player 2");
+            //d.Add(5, "Player 4");
 
             Console.WriteLine("Number of players : " + d.Count);
             string temp = d[1];          
