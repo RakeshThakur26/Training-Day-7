@@ -12,24 +12,34 @@ namespace TasksAndParallelism
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter a number : ");
+            int n = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine($"Main Thread : {Thread.CurrentThread.ManagedThreadId} Statred");
-            Task task1 = Task.Run(() => { PrintCounter(); });
-            Console.WriteLine($"Main Thread : {Thread.CurrentThread.ManagedThreadId} Completed");
-            Console.ReadKey();
-            
-           
+            Console.WriteLine("Sequential Thread...");
+            for (int i = 1; i < n; i++)
+            {
+                if(i%2 == 0)
+                    Console.WriteLine("Even number : "+ i + ", Thread : " + Thread.CurrentThread.ManagedThreadId);
+                else
+                    Console.WriteLine("Odd number  : " + i + ", Thread : " + Thread.CurrentThread.ManagedThreadId);
 
+                Thread.Sleep(500);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Parallel Thread...");
+
+            Parallel.For(1, n,i =>
+            {
+                if (i % 2 == 0)
+                    Console.WriteLine("Even number : " + i + ", Thread : " + Thread.CurrentThread.ManagedThreadId);
+                else
+                    Console.WriteLine("Odd number  : " + i + ", Thread : " + Thread.CurrentThread.ManagedThreadId);
+                Thread.Sleep(500);
+            });
+
+            Console.ReadLine();
           
         }
-        static void PrintCounter()
-        {
-            Console.WriteLine($"Child Thread : {Thread.CurrentThread.ManagedThreadId} Started");
-            for (int count = 1; count <= 5; count++)
-            {
-                Console.WriteLine($"count value: {count}");
-            }
-            Console.WriteLine($"Child Thread : {Thread.CurrentThread.ManagedThreadId} Completed");
-        }
+      
     }
 }
