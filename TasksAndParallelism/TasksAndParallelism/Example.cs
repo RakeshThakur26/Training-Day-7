@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TasksAndParallelism
 {
-    class Example
+   public class Example
     {
         public void Threading()
         {
@@ -29,5 +29,26 @@ namespace TasksAndParallelism
             Console.WriteLine("Directory '{0}':", @"C:\Training\Batch2Assignment\Batch2Assignment"); 
             Console.WriteLine("{0:N0} files, {1:N0} bytes", files.Length, totalSize);
         }
+
+
+        public void Display()
+        {
+            FileStream fs = new FileStream(@"C:\Training\Training-Day-7\TasksAndParallelism\TasksAndParallelism\networklog.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            
+            List<string> line = new List<string>();
+            line = File.ReadLines(@"C:\Training\Training-Day-7\TasksAndParallelism\TasksAndParallelism\networklog.txt").ToList();
+            Parallel.For(0, line.Count, i => 
+            {
+                Console.WriteLine("Line = {0} , Thread = {1}", line[i], Thread.CurrentThread.ManagedThreadId);
+                Thread.Sleep(500);
+            });
+
+        }
+
+        
     }
+
+    
+
 }
